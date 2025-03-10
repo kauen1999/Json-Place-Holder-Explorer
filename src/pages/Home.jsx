@@ -1,39 +1,29 @@
 import React, { useContext } from 'react'
-import { UserContext } from '../context/GlobalContext'
+import { AlbumContext } from '../context/GlobalContext'
 
 const Home = () => {
-  const {users} = useContext(UserContext);
-  console.log(users);
+  const { albums } = useContext(AlbumContext);
   return (
     <div>
   Home
   <div>
-    {users?.map((user) => (
-      <ul key={user.id}>
+    {albums?.map((album) => (
+      <div key={album.id}>
         <li>
-          <strong>{user.name}</strong>
+          <strong>{album.title}</strong>
         </li>
-        <li>
-          <strong>Email:</strong> {user.email}
-        </li>
-        <li>
-          <strong>Telefone:</strong> {user.phone}
-        </li>
-        <li>
-          <strong>Website:</strong> {user.website}
-        </li>
-        <li>
-          <strong>Tarefas:</strong>
-          <ul>
-            {user.tasks.map((task) => (
-              <li key={task.id}>
-                <span>{task.title}</span>
-                <span>{task.completed ? " (Concluída)" : " (Não Concluída)"}</span>
-              </li>
+          <strong>photos:</strong>
+          <span>
+            {album.photos.map((photo) => (
+              <ul key={photo.id}>
+                <li>{photo.title}</li>
+                <li>{photo.url}</li>
+                <li>{photo.thumbnailUrl}</li>
+              </ul>
             ))}
-          </ul>
-        </li>
-      </ul>
+          </span>
+          <span>------------------------------</span>
+      </div>
     ))}
   </div>
 </div>
