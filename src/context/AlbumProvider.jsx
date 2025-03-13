@@ -5,19 +5,16 @@ export const AlbumProvider = ({children}) => {
     const [ albums, setAlbums] = useState([]);
 
     useEffect(()=>{
-        const postFunction = async () => {
+        const albumFunction = async () => {
             try {
                 const [fetchAlbums, fetchPhotos] = await Promise.all([
                     fetch("https://jsonplaceholder.typicode.com/albums"),
                     fetch("https://jsonplaceholder.typicode.com/photos"),
                 ])
-                
-                const [albumsResponse, photosResponse] = await Promise.all([
-                    fetchAlbums.json(),
-                    fetchPhotos.json(),
-                ])
+                const albumsData = await fetchAlbums.json();
+                const photosData = await fetchPhotos.json();
 
-            const photosMap = photosResponse.reduce((map, photo) =>{
+            const photosMap = photosData.reduce((map, photo) =>{
                 if(!map[photo.albumId]){
                     map[photo.albumId] =[];
                 }
@@ -25,7 +22,7 @@ export const AlbumProvider = ({children}) => {
                 return map;
             },{});
 
-            const albumWithPhotos = albumsResponse.map((album)=>({
+            const albumWithPhotos = albumsData.map((album)=>({
                 ...album,
                 photos: photosMap[album.id] || [],
 
@@ -37,7 +34,7 @@ export const AlbumProvider = ({children}) => {
                 console.error("erro ao obter endpoint album e photos",error);
             }
         }
-        postFunction();
+        albumFunction();
     },[]);
     return <AlbumContext.Provider value={{albums}}> {children} </AlbumContext.Provider>
 }
