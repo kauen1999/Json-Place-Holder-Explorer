@@ -1,13 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-
-const Home = () => {
+const Albums = () => {
   return (
     <div>
       <div><Navbar/></div>
-      <div>Home</div>
+      <div>Albums</div>
       </div>
   )
 }
 
-export default Home
+export default Albums
