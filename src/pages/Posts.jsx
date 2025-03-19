@@ -21,10 +21,10 @@ const Posts = () => {
         <div key={user.id} className="mt-5 m-2">
           {user.posts.map((post) => (
             <div key={post.id} className="mb-5 rounded-sm shadow-sm">
-              <div className="shadow-sm">
+              <div>
                 {/* Nome do usuário */}
-                <div className="p-1 rounded-sm shadow-sm mb-2 text-gray-800">
-                  {user.name}
+                <div className="p-1 rounded-sm text-gray-800">
+                  {user.username}
                 </div>
                 {/* Conteúdo do post */}
                 <div>
@@ -37,7 +37,7 @@ const Posts = () => {
               {/* Botão para mostrar/ocultar comentários */}
               <div className="m-1">
                 <button onClick={() => toggleComments(post.id)} className={`p-1 font-mono text-sm rounded-lg text-center ${openComments[post.id] ? "bg-gray-300 text-gray-500"  : "text-gray-400" }`}>
-                  comments({post.comments.length})
+                  {post.comments.length} comments 
                 </button>
               </div>
               {/* Exibir os comentários apenas quando necessário */}
@@ -52,7 +52,7 @@ const Posts = () => {
                     {post.comments.map((comment) => (
                       <div key={comment.id} className="mt-2 shadow-sm rounded-md mb-2">
                         <div className="p-1 rounded-sm text-blue-400">
-                          {comment.name} - {comment.email}
+                          {comment.email}
                         </div>
                         <div>
                           <p className="p-1 font-mono text-sm font-thin">
